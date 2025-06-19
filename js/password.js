@@ -99,23 +99,19 @@ async function sha256(message) {
 function showPasswordModal() {
     const passwordModal = document.getElementById('passwordModal');
     if (passwordModal) {
-        // 防止出现豆瓣区域滚动条
-        document.getElementById('doubanArea').classList.add('hidden');
-
+        document.getElementById('doubanArea')?.classList.add('hidden');
         passwordModal.style.display = 'flex';
 
-    // 隐藏“×”按钮
+        // 隐藏“×”按钮
         const closeBtn = document.getElementById('closePasswordModal');
         if (closeBtn) {
             closeBtn.style.display = 'none';
-            closeBtn.onclick = null; // 清除点击事件
-        }    
-        // 确保输入框获取焦点
+            closeBtn.onclick = null;
+        }
+
         setTimeout(() => {
             const passwordInput = document.getElementById('passwordInput');
-            if (passwordInput) {
-                passwordInput.focus();
-            }
+            if (passwordInput) passwordInput.focus();
         }, 100);
     }
 }
@@ -217,14 +213,23 @@ function showAdminPasswordModal() {
     const passwordModal = document.getElementById('passwordModal');
     if (!passwordModal) return;
 
-    // 清空密码输入框
     const passwordInput = document.getElementById('passwordInput');
     if (passwordInput) passwordInput.value = '';
 
-    // 修改标题为管理员验证
+    // 设置标题为“管理员验证”
     const title = passwordModal.querySelector('h2');
     if (title) title.textContent = '管理员验证';
+
     passwordModal.style.display = 'flex';
+
+    // 显示“×”按钮并绑定关闭事件
+    const closeBtn = document.getElementById('closePasswordModal');
+    if (closeBtn) {
+        closeBtn.style.display = '';
+        closeBtn.onclick = function () {
+            passwordModal.style.display = 'none';
+        };
+    }
 
     // 设置表单提交处理
     const form = document.getElementById('passwordForm');
@@ -234,17 +239,10 @@ function showAdminPasswordModal() {
             const password = document.getElementById('passwordInput').value.trim();
             if (await verifyPassword(password, 'ADMINPASSWORD')) {
                 passwordModal.style.display = 'none';
-                document.getElementById('settingsPanel').classList.add('show');
+                document.getElementById('settingsPanel')?.classList.add('show');
             } else {
                 showPasswordError();
             }
-
-    // 显示“×”按钮
-    const closeBtn = document.getElementById('closePasswordModal');
-    if (closeBtn) {
-        closeBtn.style.display = ''; // 显示
-        closeBtn.onclick = function () {
-            passwordModal.style.display = 'none';        
         };
     }
 }
@@ -252,16 +250,7 @@ function showAdminPasswordModal() {
 // 在页面加载完成后初始化密码保护
 document.addEventListener('DOMContentLoaded', function () {
     initPasswordProtection();
-    // 新增: 监听关闭按钮
-    const closeBtn = document.getElementById('closePasswordModal');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function () {
-            const passwordModal = document.getElementById('passwordModal');
-            if (passwordModal) {
-                passwordModal.style.display = 'none';
-            }
-        });
-    }
+
 });
 
 
