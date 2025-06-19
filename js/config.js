@@ -7,13 +7,13 @@ const MAX_HISTORY_ITEMS = 5;
 // 密码保护配置
 const PASSWORD_CONFIG = {
     localStorageKey: 'passwordVerified',  // 存储验证状态的键名
-    verificationTTL: 24*60*60*1000,  // 验证有效期（90天，约3个月）
+    verificationTTL: 24*60*60*1000,  // 验证有效期（90天，约3个月）改为1天
     adminLocalStorageKey: 'adminPasswordVerified'  // 新增的管理员验证状态的键名
 };
 
 // 网站信息配置
 const SITE_CONFIG = {
-    name: 'LoveXiaoYuan',
+    name: 'LibreTV',
     url: 'https://libretv.is-an.org',
     description: '免费在线视频搜索与观看平台',
     logo: 'image/logo.png',
