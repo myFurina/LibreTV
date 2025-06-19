@@ -239,6 +239,16 @@ function showAdminPasswordModal() {
 // 在页面加载完成后初始化密码保护
 document.addEventListener('DOMContentLoaded', function () {
     initPasswordProtection();
+    // 新增: 监听关闭按钮
+    const closeBtn = document.getElementById('closePasswordModal');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            const passwordModal = document.getElementById('passwordModal');
+            if (passwordModal) {
+                passwordModal.style.display = 'none';
+            }
+        });
+    }
 });
 
 
