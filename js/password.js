@@ -104,6 +104,12 @@ function showPasswordModal() {
 
         passwordModal.style.display = 'flex';
 
+    // 隐藏“×”按钮
+        const closeBtn = document.getElementById('closePasswordModal');
+        if (closeBtn) {
+            closeBtn.style.display = 'none';
+            closeBtn.onclick = null; // 清除点击事件
+        }    
         // 确保输入框获取焦点
         setTimeout(() => {
             const passwordInput = document.getElementById('passwordInput');
@@ -232,6 +238,13 @@ function showAdminPasswordModal() {
             } else {
                 showPasswordError();
             }
+
+    // 显示“×”按钮
+    const closeBtn = document.getElementById('closePasswordModal');
+    if (closeBtn) {
+        closeBtn.style.display = ''; // 显示
+        closeBtn.onclick = function () {
+            passwordModal.style.display = 'none';        
         };
     }
 }
